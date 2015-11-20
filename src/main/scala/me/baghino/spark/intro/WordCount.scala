@@ -10,11 +10,13 @@ object WordCountOrdering extends Ordering[(String, Int)] {
 }
 
 object WordCount extends App {
-  
+
+  // We'll run our project in local mode
   val conf = new SparkConf().
     setAppName("word-count").
     setMaster("local[*]")
-  
+
+  // Here we initialize the context with the configuration above
   val sc = new SparkContext(conf)
 
   // Load the file
@@ -37,9 +39,10 @@ object WordCount extends App {
 
   // Print each item in the RDD
   for ((word, count) <- topTen) {
-    println(s"$word: $count")
+    println(s"$word -> ${Console.GREEN}$count${Console.RESET}")
   }
 
+  // Halt the context before closing the application
   sc.stop()
 
 }
